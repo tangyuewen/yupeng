@@ -1,0 +1,12 @@
+# 运行时生成的本地数据（快照库）不入库
+data/
+
+# 个人监控清单（含自选标的）不入库，首次运行从 example 自动复制
+config/watchlist.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env

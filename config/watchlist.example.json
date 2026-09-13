@@ -1,0 +1,42 @@
+{
+  "broad": [
+    {"name": "韩国综合", "code": "KS11", "asset": "global_index", "yahoo": "^KS11"},
+    {"name": "台湾加权", "code": "TWII", "asset": "global_index", "yahoo": "^TWII"},
+    {"name": "日经225", "code": "N225", "asset": "global_index", "yahoo": "^N225"},
+    {"name": "纳指100", "code": "QQQ", "asset": "us_etf", "yahoo": "QQQ"},
+    {"name": "标普500", "code": "SPY", "asset": "us_etf", "yahoo": "SPY"},
+    {"name": "创业板指", "code": "399006", "asset": "cn_index"},
+    {"name": "沪深300", "code": "000300", "asset": "cn_index"},
+    {"name": "中证A500", "code": "000510", "asset": "cn_index"},
+    {"name": "上证50", "code": "000016", "asset": "cn_index"},
+    {"name": "中证500", "code": "000905", "asset": "cn_index"},
+    {"name": "中证1000", "code": "000852", "asset": "cn_index"},
+    {"name": "中证2000", "code": "932000", "asset": "cn_csindex"},
+    {"name": "科创50", "code": "000688", "asset": "cn_index"},
+    {"name": "北证50", "code": "899050", "asset": "cn_index"},
+    {"name": "恒生科技", "code": "HS2083", "asset": "hk_index"},
+    {"name": "恒生指数", "code": "HSI", "asset": "hk_index"},
+    {"name": "国企指数", "code": "HSCEI", "asset": "hk_index"},
+    {"name": "微盘股", "code": "883418", "asset": "ths_industry"},
+    {"name": "黄金现货", "code": "AUUSDO", "asset": "metal_spot", "metal": "XAU"},
+    {"name": "白银现货", "code": "AGUSDO", "asset": "metal_spot", "metal": "XAG"},
+    {"name": "德国DAX", "code": "DAX", "asset": "global_index", "yahoo": "^GDAXI"},
+    {"name": "英国富时", "code": "FTSE", "asset": "global_index", "yahoo": "^FTSE"}
+  ],
+  "sector": [
+    {"name": "中证煤炭", "code": "399998", "asset": "cn_index"},
+    {"name": "有色金属", "code": "000819", "asset": "cn_index"},
+    {"name": "中证红利", "code": "000922", "asset": "cn_index"},
+    {"name": "中证消费", "code": "000932", "asset": "cn_index"},
+    {"name": "证券公司", "code": "399975", "asset": "cn_index"},
+    {"name": "电网设备", "code": "881278", "asset": "ths_industry"},
+    {"name": "半导体", "code": "881121", "asset": "ths_industry"},
+    {"name": "光伏设备", "code": "881279", "asset": "ths_industry"},
+    {"name": "新能源", "code": "000941", "asset": "cn_index"},
+    {"name": "机器人", "code": "H30590", "asset": "cn_csindex"},
+    {"name": "中证医疗", "code": "399989", "asset": "cn_index"},
+    {"name": "商业航天", "code": "886078", "asset": "ths_industry"},
+    {"name": "细分化工", "code": "000813", "asset": "cn_index"},
+    {"name": "房地产", "code": "931775", "asset": "cn_csindex"}
+  ]
+}

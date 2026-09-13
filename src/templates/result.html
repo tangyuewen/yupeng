@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}趋势观测 · {{ date }}{% endblock %}
+{% block content %}
+
+<div class="toolbar">
+  <form method="get" action="/" class="date-form">
+    <label>交易日</label>
+    <select name="date" onchange="this.form.submit()">
+      {% if not date %}<option>— 暂无快照 —</option>{% endif %}
+      {% for d in dates %}
+      <option value="{{ d }}" {% if d == date %}selected{% endif %}>{{ d }}</option>
+      {% endfor %}
+    </select>
+  </form>
+  <div class="actions">
+    <a class="btn" href="/run?mode=refresh">智能补缺</a>
+    <a class="btn ghost" href="/run?mode=full">获取数据(全量)</a>
+    <a class="btn ghost" href="/run?today=1&mode=live">不等美股收盘</a>
+  </div>
+</div>
+
+{% if not date %}
+  <div class="card"><p class="muted">还没有快照。点击上方「获取数据(全量)」联网计算并生成首份观测表。</p></div>
+{% else %}
+
+{% for grp, rows in groups.items() %}
+  <h2 class="section">{{ group_title.get(grp, grp) }}（{{ rows|length }} 个）</h2>
+  <div class="card">
+  <table>
+    <colgroup>
+      <col style="width:5%"><col style="width:9%"><col style="width:14%"><col style="width:8%">
+      <col style="width:8%"><col style="width:9%"><col style="width:9%"><col style="width:6%">
+      <col style="width:11%"><col style="width:9%"><col style="width:8%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>排序</th><th>代码</th><th>名称</th><th>涨幅%</th><th>现价</th>
+        <th>20日均线</th><th>偏离率</th><th>趋势</th><th>状态转变时间</th>
+        <th>区间涨幅%</th><th>排序变化</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for r in rows %}
+      <tr {% if r.row_bg %}style="background:{{ r.row_bg }}"{% endif %}>
+        <td class="num">{{ r.rank }}</td>
+        <td class="code">{{ r.code }}</td>
+        <td class="name">{{ r.name }}</td>
+        {% if r.error %}
+        <td colspan="8" class="err">取数失败：{{ r.error }}</td>
+        {% else %}
+        <td class="{{ 'pos' if r.day_chg > 0 else 'neg' }} num">{{ r.day_pct }}</td>
+        <td class="num">{{ "%.0f"|format(r.last_close) }}</td>
+        <td class="num">{{ "%.0f"|format(r.ma20) }}</td>
+        <td class="dev num" style="background:{{ r.dev_bg }}">{{ r.dev_pct }}</td>
+        <td><span class="trend">{{ r.trend }}</span></td>
+        <td class="num">{{ r.cross_date[2:].replace('-', '.') if r.cross_date }}</td>
+        <td class="{{ 'pos' if r.interval_ret > 0 else 'neg' }} num">{{ r.interval_pct }}</td>
+        <td class="num {{ 'rc-up' if r.rank_chg > 0 else ('rc-down' if r.rank_chg < 0 else 'rc-flat') }}">{{ r.rank_chg_disp }}</td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+{% endfor %}
+
+<div class="legend">
+  <span class="dot" style="background:#e59a9a"></span><b>红底</b>=偏离率&gt;0，收盘价在临界值(20日线)上方（原YES，偏强）&nbsp;&nbsp;
+  <span class="dot" style="background:#7ebf6d"></span><b>绿底</b>=偏离率&lt;0（原NO，偏弱）&nbsp;&nbsp;
+  <span class="dot" style="background:#f6e07c"></span><b>黄底整行</b>=当日发生状态转变(穿越均线)&nbsp;&nbsp;
+  偏离率=(现价−MA20)/MA20，按此值降序排名，1=短期最强；排序变化↑走强/↓走弱
+</div>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}监控配置{% endblock %}
+{% block content %}
+
+<h2 class="section">监控清单（config/watchlist.json）</h2>
+<div class="card">
+  <p class="muted">直接在 <code>config/watchlist.json</code> 中增删标的即可，无需改代码。保存后下次「获取数据」生效。
+  asset 取值：cn_index / cn_csindex / hk_index / us_etf / global_index / metal_spot / ths_industry。</p>
+  {% for grp, items in watchlist.items() %}
+  <h3 style="font-size:15px;margin:18px 0 8px;">{{ group_title.get(grp, grp) }}</h3>
+  <table class="cfg-table">
+    <thead><tr><th>名称</th><th>代码</th><th>asset</th><th>备注</th></tr></thead>
+    <tbody>
+    {% for it in items %}
+    <tr>
+      <td>{{ it.name }}</td>
+      <td><code>{{ it.code }}</code></td>
+      <td>{{ it.get('asset','') }}</td>
+      <td class="muted">{{ it.get('yahoo','') }}{{ it.get('metal','') }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endfor %}
+</div>
+
+{% endblock %}
